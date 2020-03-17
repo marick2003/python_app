@@ -47,7 +47,7 @@ def handle_message(event):
     # 決定要回傳什麼 Component 到 Channel
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text='123'))
 
 
 if __name__ == '__main__':
