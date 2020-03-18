@@ -61,7 +61,7 @@ def todo():
 def dojob(): 
     #BlockingScheduler
     scheduler = BlockingScheduler()
-    scheduler.add_job(todo, 'interval', second =5, id='test_job1')
+    scheduler.add_job(todo, 'interval', seconds=3, id='test_job1')
     scheduler.start()
 
 
