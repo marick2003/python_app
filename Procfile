@@ -1,2 +1,1 @@
-gunicorn mysite.wsgi --log-file - 
-python app.py
+web: gunicorn gettingstarted.wsgi --log-file -
