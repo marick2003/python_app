@@ -51,24 +51,6 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
 
-# def todo():
-#     now = datetime.datetime.now()
-#     ts = now.strftime('%Y-%m-%d %H:%M:%S')
-#     print('do func  time :',ts)
-#     #line_bot_api.push_message(to, TextSendMessage(text='台科大電腦研習社'))
-
-# #執行定時
-# scheduler = BlockingScheduler()
-# scheduler.add_job(todo, 'interval', seconds=100, id='test_job1')
-# scheduler.start()
-
-sched = BlockingScheduler()
-
-@sched.scheduled_job('interval', minutes=3)
-def timed_job():
-    print('This job is run every three minutes.')
-sched.start()
-
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
     app.run(host='0.0.0.0', port=port)
