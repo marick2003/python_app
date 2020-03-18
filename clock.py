@@ -3,6 +3,9 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
+
+
+
 @sched.scheduled_job('cron', minute='*/2')
 def scheduled_job():
     print('========== APScheduler CRON =========')
@@ -17,3 +20,5 @@ def scheduled_job():
         
     for key, value in conn.getheaders():
         print(key, value)
+
+sched.start()
