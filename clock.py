@@ -14,11 +14,5 @@ def scheduled_job():
     # 利用datetime查詢時間
     print(f'{datetime.datetime.now().ctime()}')
     print('========== APScheduler CRON =========')
-
-    url = "https://pythonline2020.herokuapp.com/"
-    conn = urllib.request.urlopen(url)
-        
-    for key, value in conn.getheaders():
-        print(key, value)
-
+    
 sched.start()
