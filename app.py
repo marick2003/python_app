@@ -58,7 +58,7 @@ def todo():
     #line_bot_api.push_message(to, TextSendMessage(text='台科大電腦研習社'))
 
 #執行定時
-def dojob():
+def dojob(): 
     #BlockingScheduler
     scheduler = BlockingScheduler()
     scheduler.add_job(todo, 'interval', second =5, id='test_job1')
