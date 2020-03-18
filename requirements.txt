@@ -14,6 +14,7 @@ entrypoints==0.3
 Flask==1.1.1
 Flask-Cors==3.0.8
 future==0.18.2
+gunicorn==20.0.4
 html5lib==1.0.1
 idna==2.9
 ipykernel==5.1.4
@@ -52,6 +53,7 @@ pylint==2.4.4
 pyparsing==2.4.6
 pyrsistent==0.15.7
 python-dateutil==2.8.1
+pywin32==227
 pywinpty==0.5.7
 pyzmq==19.0.0
 qtconsole==4.7.1
