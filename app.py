@@ -34,7 +34,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+    if message == '@查詢匯率':
+       resp = requests.get('https://tw.rter.info/capi.php')
+       currency_data = resp.json()
+       usd_to_twd = currency_data['USDTWD']['Exrate']
+
+       line_bot_api.reply_message(event.reply_token, usd_to_twd)
     
     
 
