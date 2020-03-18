@@ -1,6 +1,8 @@
 import os, sys
 from flask import Flask, request, abort, jsonify
 
+import requests
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -36,7 +38,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     input_text = event.message.text
-    
+
     if input_text == '@查詢匯率':
         resp = requests.get('https://tw.rter.info/capi.php')
         currency_data = resp.json()
