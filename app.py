@@ -1,3 +1,6 @@
+import datetime
+import time
+from apscheduler.schedulers.blocking import BlockingScheduler
 import os, sys
 from flask import Flask, request, abort, jsonify
 
@@ -43,14 +46,27 @@ def handle_message(event):
         resp = requests.get('https://tw.rter.info/capi.php')
         currency_data = resp.json()
         usd_to_twd = currency_data['USDTWD']['Exrate']
-
+        print(event.reply_token)
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
 
-    
+def todo():
+    now = datetime.datetime.now()
+    ts = now.strftime('%Y-%m-%d %H:%M:%S')
+    print('do func  time :',ts)
+    #line_bot_api.push_message(to, TextSendMessage(text='台科大電腦研習社'))
+
+#執行定時
+def dojob():
+    #BlockingScheduler
+    scheduler = BlockingScheduler()
+    scheduler.add_job(todo, 'interval', second =5, id='test_job1')
+    scheduler.start()
+
 
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    dojob()
