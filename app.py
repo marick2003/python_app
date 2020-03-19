@@ -56,6 +56,14 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=f'LINE Detail:{obj}'))
 
+scheduler = BlockingScheduler() 
+def job_task(): 
+    print "%s: 執行任務" % time.asctime() 
+    # 添加任務並設置觸發方式為3s一次 
+    scheduler.add_job(job_task, 'interval', seconds=3) 
+    # 開始運行調度器
+scheduler.start()
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
