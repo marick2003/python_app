@@ -82,7 +82,7 @@ def handle_message(event):
     if input_text == '@周子揚':
          line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=f'小GG'))
+            TextSendMessage(text='小GG'))
         
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
