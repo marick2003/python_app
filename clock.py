@@ -2,7 +2,7 @@ import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 import urllib.request
 sched = BlockingScheduler()
-import urllib.request
+from urllib import request, parse
 
 
 
