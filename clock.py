@@ -9,7 +9,7 @@ import requests
 
 stock = BlockingScheduler() 
 
-@sched.scheduled_job('cron', minute='*/25')
+@sched.scheduled_job('cron', minute='*/1')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     # 馬上讓我們瞧瞧
