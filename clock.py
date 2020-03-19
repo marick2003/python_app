@@ -1,5 +1,4 @@
 import datetime
-from apscheduler.schedulers.blocking import BlockingScheduler
 import urllib.request
 
 from urllib import request, parse
@@ -7,9 +6,10 @@ from urllib import request, parse
 from twstock import Stock
 import requests
 
-stock = BlockingScheduler() 
+from apscheduler.schedulers.blocking import BlockingScheduler
+sched = BlockingScheduler() 
 
-@sched.scheduled_job('cron', minute='*/1')
+@sched.scheduled_job('cron', minute='*/2')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     # 馬上讓我們瞧瞧
@@ -30,4 +30,5 @@ def scheduled_job():
         
     for key, value in conn.getheaders():
         print(key, value)
+
 sched.start()
