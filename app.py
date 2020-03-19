@@ -79,7 +79,7 @@ def handle_message(event):
     if input_text == '@TEST':
          line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(message))
+            message)
         
 
 # scheduler = BlockingScheduler() 

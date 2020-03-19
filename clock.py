@@ -58,8 +58,8 @@ def scheduled_job():
     #不僅不發薪水，還要 Heroku 全天候工作，我們還真是個慣老闆啊。
     url = "https://pythonline2020.herokuapp.com/"
     conn = urllib.request.urlopen(url)
-        
-    # for key, value in conn.getheaders():
-    #     print(key, value)
+       
+    for key, value in conn.getheaders():
+        print(key, value)
 
 sched.start()
