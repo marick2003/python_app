@@ -7,6 +7,8 @@ from urllib import request, parse
 from twstock import Stock
 import requests
 
+stock = BlockingScheduler() 
+
 @sched.scheduled_job('cron', minute='*/25')
 def scheduled_job():
     print('========== APScheduler CRON =========')
