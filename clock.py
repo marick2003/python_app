@@ -9,6 +9,37 @@ import requests
 from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler() 
 
+stock_list = [
+    '2330',  # 台積電
+    '2317',  # 鴻海
+    '1301',  # 台塑
+    '1326',  # 台化
+    '2412',  # 中華電
+    '3008',  # 大立光
+    '1303',  # 南亞
+    '2308',  # 台達電
+    '2454',  # 聯發科
+    '2881',  # 富邦金
+    '8299',  # 群聯
+    '6223',
+]
+stock_name = {
+    '2330': u'台積電',
+    '2317': u'鴻海',
+    '1301': u'台塑',
+    '1326': u'台化',
+    '2412': u'中華電',
+    '3008': u'大立光',
+    '1303': u'南亞',
+    '2308': u'台達電',
+    '2454': u'聯發科',
+    '2881': u'富邦金',
+    '8299': u'群聯',
+    '6223': '旺矽'
+}
+
+
+
 @sched.scheduled_job('cron', minute='*/2')
 def scheduled_job():
     print('========== APScheduler CRON =========')
@@ -28,7 +59,7 @@ def scheduled_job():
     url = "https://pythonline2020.herokuapp.com/"
     conn = urllib.request.urlopen(url)
         
-    for key, value in conn.getheaders():
-        print(key, value)
+    # for key, value in conn.getheaders():
+    #     print(key, value)
 
 sched.start()
