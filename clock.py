@@ -4,9 +4,10 @@ import urllib.request
 sched = BlockingScheduler()
 from urllib import request, parse
 
+from twstock import Stock
+import requests
 
-
-@sched.scheduled_job('cron', minute='*/2')
+@sched.scheduled_job('cron', minute='*/25')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     # 馬上讓我們瞧瞧
@@ -24,4 +25,11 @@ def scheduled_job():
         
     for key, value in conn.getheaders():
         print(key, value)
+
+@sched.scheduled_job2('cron', minute='*/1')
+def scheduled_job2():
+    print('========== Sreach Stock =========')
+    stock = Stock('2330')    
+    print(stock)
+
 sched.start()

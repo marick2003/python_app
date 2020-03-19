@@ -50,7 +50,12 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
-            
+    if input_text == '@UID':
+        obj=event
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=f'LINE Detail:{obj}'))
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
