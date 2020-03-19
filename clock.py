@@ -62,4 +62,10 @@ def scheduled_job():
     for key, value in conn.getheaders():
         print(key, value)
 
+@sched.add_job('interval',second=100)
+def add_job():
+    print('========== add job ===========')
+    print(f'{datetime.datetime.now().ctime()}')
+
+
 sched.start()

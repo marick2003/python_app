@@ -42,24 +42,28 @@ def callback():
 def handle_message(event):
     input_text = event.message.text
 
-    message = ImagemapSendMessage(
-    base_url='https://example.com/base',
-    alt_text='this is an imagemap',
-    base_size=BaseSize(height=1040, width=1040),
-    actions=[
-            URIImagemapAction(
-                link_uri='https://example.com/',
-                area=ImagemapArea(
-                    x=0, y=0, width=520, height=1040
-                )
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://example.com/image.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[
+            PostbackTemplateAction(
+                label='postback',
+                text='postback text',
+                data='action=buy&itemid=1'
             ),
-            MessageImagemapAction(
-                text='hello',
-                area=ImagemapArea(
-                    x=520, y=0, width=520, height=1040
-                )
+            MessageTemplateAction(
+                label='message',
+                text='message text'
+            ),
+            URITemplateAction(
+                label='uri',
+                uri='http://example.com/'
             )
-        ]
+            ]
+        )
     )
 
 
@@ -81,14 +85,6 @@ def handle_message(event):
             event.reply_token,
             message)
         
-
-# scheduler = BlockingScheduler() 
-# def job_task(): 
-#     print "%s: 執行任務" % time.asctime() 
-#     # 添加任務並設置觸發方式為3s一次 
-#     scheduler.add_job(job_task, 'interval', seconds=3) 
-#     # 開始運行調度器
-# scheduler.start()
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
     # app.run(host='0.0.0.0', port=port)
