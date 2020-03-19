@@ -42,6 +42,27 @@ def callback():
 def handle_message(event):
     input_text = event.message.text
 
+    message = ImagemapSendMessage(
+    base_url='https://example.com/base',
+    alt_text='this is an imagemap',
+    base_size=BaseSize(height=1040, width=1040),
+    actions=[
+            URIImagemapAction(
+                link_uri='https://example.com/',
+                area=ImagemapArea(
+                    x=0, y=0, width=520, height=1040
+                )
+            ),
+            MessageImagemapAction(
+                text='hello',
+                area=ImagemapArea(
+                    x=520, y=0, width=520, height=1040
+                )
+            )
+        ]
+    )
+
+
     if input_text == '@查詢匯率':
         resp = requests.get('https://tw.rter.info/capi.php')
         currency_data = resp.json()
@@ -55,6 +76,11 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=f'LINE Detail:{obj}'))
+    if input_text == '@TEST':
+         line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(message))
+        
 
 # scheduler = BlockingScheduler() 
 # def job_task(): 
@@ -63,9 +89,7 @@ def handle_message(event):
 #     scheduler.add_job(job_task, 'interval', seconds=3) 
 #     # 開始運行調度器
 # scheduler.start()
-
-
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
-    app.run(host='0.0.0.0', port=port)
+    # app.run(host='0.0.0.0', port=port)
     app.run(debug=True, host='0.0.0.0', port=port)
