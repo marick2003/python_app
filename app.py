@@ -42,6 +42,7 @@ def callback():
 def handle_message(event):
     input_text = event.message.text
 
+    #stock button
     message = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -65,8 +66,6 @@ def handle_message(event):
             ]
         )
     )
-
-
     if input_text == '@查詢匯率':
         resp = requests.get('https://tw.rter.info/capi.php')
         currency_data = resp.json()
@@ -80,10 +79,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=f'LINE Detail:{obj}'))
-    if input_text == '@TEST':
+    if input_text == '@周子揚':
          line_bot_api.reply_message(
             event.reply_token,
-            message)
+            TextSendMessage(text=f'小GG'))
         
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
