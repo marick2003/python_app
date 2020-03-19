@@ -25,11 +25,12 @@ def scheduled_job():
         
     for key, value in conn.getheaders():
         print(key, value)
-        
-sched.add_job(job_function, 'interval', minute=1)
+
+
 def job_function():
     print('========== Sreach Stock =========')
     stock = Stock('2330')    
     print(stock)
 
+sched.add_job(job_function, 'interval', minute=1)
 sched.start()
