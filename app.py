@@ -13,7 +13,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+#模糊比對
+from fuzzywuzzy import fuzz
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -88,9 +89,8 @@ def handle_message(event):
                     ),
                   ]
              )
-        )    
-        
-    if input_text=="查詢匯率":
+        )     
+    if fuzz.ratio(input_text,"查詢匯率")>=80:
         # resp = requests.get('https://tw.rter.info/capi.php')
         # currency_data = resp.json()
         # usd_to_twd = currency_data['USDTWD']['Exrate']
