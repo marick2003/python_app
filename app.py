@@ -14,7 +14,6 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
-from fuzzywuzzy import fuzz
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -91,7 +90,7 @@ def handle_message(event):
              )
         )    
         
-    if fuzz.partial_ratio(input_text, "查詢匯率") >=70:
+    if input_text=="查詢匯率":
         # resp = requests.get('https://tw.rter.info/capi.php')
         # currency_data = resp.json()
         # usd_to_twd = currency_data['USDTWD']['Exrate']
