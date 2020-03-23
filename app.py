@@ -14,6 +14,8 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
+from fuzzywuzzy import fuzz
+
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
@@ -42,38 +44,65 @@ def callback():
 def handle_message(event):
     input_text = event.message.text
 
-    #stock button
-    message = TemplateSendMessage(
-    alt_text='Buttons template',
-    template=ButtonsTemplate(
-        thumbnail_image_url='https://example.com/image.jpg',
-        title='Menu',
-        text='Please select',
-        actions=[
-            PostbackTemplateAction(
-                label='postback',
-                text='postback text',
-                data='action=buy&itemid=1'
-            ),
-            MessageTemplateAction(
-                label='message',
-                text='message text'
-            ),
-            URITemplateAction(
-                label='uri',
-                uri='http://example.com/'
-            )
-            ]
+        #stock button
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://example.com/image.jpg',
+                title='Menu',
+                text='Please select',
+                actions=[
+                    PostbackTemplateAction(
+                        label='postback',
+                        text='postback text',
+                        data='action=buy&itemid=1'
+                    ),
+                    MessageTemplateAction(
+                        label='message',
+                        text='message text'
+                    ),
+                    URITemplateAction(
+                        label='uri',
+                        uri='http://example.com/'
+                    )
+                    ]
+                )
         )
-    )
-    if input_text == '@查詢匯率':
-        resp = requests.get('https://tw.rter.info/capi.php')
-        currency_data = resp.json()
-        usd_to_twd = currency_data['USDTWD']['Exrate']
-        print(event.reply_token)
+        #check button
+        D_message=TemplateSendMessage(
+             alt_text='查詢匯率',
+             template=ButtonsTemplate(
+                 thumbnail_image_url='https://example.com/image.jpg',
+                 title='Menu',
+                 text='Please select',
+                  actions=[
+                    MessageTemplateAction(
+                        label='美金匯率',
+                        text='美金匯率'
+                    ),
+                    MessageTemplateAction(
+                        label='澳幣匯率',
+                        text='澳幣匯率'
+                    ),
+                    MessageTemplateAction(
+                        label='日幣匯率',
+                        text='日幣匯率'
+                    ),
+                  ]
+             )
+        )
+        
+    if fuzz.partial_ratio(input_text, "查詢匯率") >=70:
+        # resp = requests.get('https://tw.rter.info/capi.php')
+        # currency_data = resp.json()
+        # usd_to_twd = currency_data['USDTWD']['Exrate']
+        # print(event.reply_token)
+        # line_bot_api.reply_message(
+        #     event.reply_token,
+        #     TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
+              event.reply_token,D_message
+         )
     if input_text == '@UID':
         obj=event
         line_bot_api.reply_message(
