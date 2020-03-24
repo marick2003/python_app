@@ -17,6 +17,8 @@ from linebot.models import *
 from fuzzywuzzy import fuzz
 #
 from bs4 import BeautifulSoup
+#
+import math
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -117,20 +119,21 @@ def handle_message(event):
         resp = requests.get('https://forex.cnyes.com/currency/JPY/TWD')
         soup = BeautifulSoup(resp.text, 'html5lib')
         _ans=soup.find('div',class_="currency-now")
-       
-        print(_ans)
+        _num=round(float(_ans.text)*100,2)
+        print(_num)
         line_bot_api.reply_message(
              event.reply_token,
-             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{ _ans.text*100}'))
+             TextSendMessage(text=f'日幣 JPY 對台幣 TWD：1:{_num}'))
 
     if fuzz.ratio(input_text,"澳幣匯率")>=80:
-        resp = requests.get('https://tw.rter.info/capi.php')
-        currency_data = resp.json()
-        usd_to_twd = currency_data['USDTWD']['Exrate']
-        print(event.reply_token)
+        resp = requests.get('https://forex.cnyes.com/currency/AUD/TWD')
+        soup = BeautifulSoup(resp.text, 'html5lib')
+        _ans=soup.find('div',class_="currency-now")
+        _num=round(float(_ans.text)*100,2)
+        print(_num)
         line_bot_api.reply_message(
              event.reply_token,
-             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
+             TextSendMessage(text=f'澳幣 AUD 對台幣 TWD：1:{_num}'))
 
     if input_text == '@UID':
         obj=event

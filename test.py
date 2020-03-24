@@ -31,5 +31,5 @@ import math
 resp = requests.get('https://forex.cnyes.com/currency/JPY/TWD')
 soup = BeautifulSoup(resp.text, 'html5lib')
 _ans=soup.find('div',class_="currency-now")
-_num=_ans.text
-print(int(_num*100))
+_num=round(float(_ans.text)*100,2)
+print(_num)
