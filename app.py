@@ -15,6 +15,8 @@ from linebot.exceptions import (
 from linebot.models import *
 #模糊比對
 from fuzzywuzzy import fuzz
+#
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -112,13 +114,14 @@ def handle_message(event):
              TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
     
     if fuzz.ratio(input_text,"日幣匯率")>=80:
-        resp = requests.get('https://tw.rter.info/capi.php')
-        currency_data = resp.json()
-        usd_to_twd = currency_data['USDTWD']['Exrate']
-        print(event.reply_token)
+        resp = requests.get('https://forex.cnyes.com/currency/JPY/TWD')
+        soup = BeautifulSoup(resp.text, 'html5lib')
+        _ans=soup.find('div',class_="currency-now")
+       
+        print(_ans)
         line_bot_api.reply_message(
              event.reply_token,
-             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
+             TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{ _ans.text*100}'))
 
     if fuzz.ratio(input_text,"澳幣匯率")>=80:
         resp = requests.get('https://tw.rter.info/capi.php')
