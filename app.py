@@ -115,35 +115,35 @@ def handle_message(event):
              event.reply_token,
              TextSendMessage(text=f'美元 USD 對台幣 TWD：1:{usd_to_twd}'))
     
-    if fuzz.ratio(input_text,"日幣匯率")>=80:
-        resp = requests.get('https://forex.cnyes.com/currency/JPY/TWD')
-        soup = BeautifulSoup(resp.text, 'html5lib')
-        _ans=soup.find('div',class_="currency-now")
-        _num=round(float(_ans.text)*100,2)
-        print(_num)
-        line_bot_api.reply_message(
-             event.reply_token,
-             TextSendMessage(text=f'日幣 JPY 對台幣 TWD：1:{_num}'))
+    # if fuzz.ratio(input_text,"日幣匯率")>=80:
+    #     resp = requests.get('https://forex.cnyes.com/currency/JPY/TWD')
+    #     soup = BeautifulSoup(resp.text, 'html5lib')
+    #     _ans=soup.find('div',class_="currency-now")
+    #     _num=round(float(_ans.text)*100,2)
+    #     print(_num)
+    #     line_bot_api.reply_message(
+    #          event.reply_token,
+    #          TextSendMessage(text=f'日幣 JPY 對台幣 TWD：1:{_num}'))
 
-    if fuzz.ratio(input_text,"澳幣匯率")>=80:
-        resp = requests.get('https://forex.cnyes.com/currency/AUD/TWD')
-        soup = BeautifulSoup(resp.text, 'html5lib')
-        _ans=soup.find('div',class_="currency-now")
-        _num=round(float(_ans.text)*100,2)
-        print(_num)
-        line_bot_api.reply_message(
-             event.reply_token,
-             TextSendMessage(text=f'澳幣 AUD 對台幣 TWD：1:{_num}'))
+    # if fuzz.ratio(input_text,"澳幣匯率")>=80:
+    #     resp = requests.get('https://forex.cnyes.com/currency/AUD/TWD')
+    #     soup = BeautifulSoup(resp.text, 'html5lib')
+    #     _ans=soup.find('div',class_="currency-now")
+    #     _num=round(float(_ans.text)*100,2)
+    #     print(_num)
+    #     line_bot_api.reply_message(
+    #          event.reply_token,
+    #          TextSendMessage(text=f'澳幣 AUD 對台幣 TWD：1:{_num}'))
 
-    if input_text == '@UID':
-        obj=event
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=f'LINE Detail:{obj}'))
-    if input_text == '@周子揚':
-         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='小GG'))
+    # if input_text == '@UID':
+    #     obj=event
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=f'LINE Detail:{obj}'))
+    # if input_text == '@周子揚':
+    #      line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text='小GG'))
         
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3000))
