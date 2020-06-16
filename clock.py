@@ -3,7 +3,8 @@ import urllib.request
 
 from urllib import request, parse
 
-from twstock import Stock
+
+import twstock
 import requests
 
 from apscheduler.schedulers.blocking import BlockingScheduler
