@@ -40,7 +40,7 @@ stock_name = {
 
 
 
-@sched.scheduled_job('cron', minute='*/30')
+@sched.scheduled_job('cron', minute='*/2')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     # 馬上讓我們瞧瞧
