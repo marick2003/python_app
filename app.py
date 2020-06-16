@@ -2,7 +2,8 @@ import os, sys
 
 from flask import Flask, request, abort, jsonify
 import requests
-
+#模糊比對
+from fuzzywuzzy import fuzz
 
 from linebot import (
     LineBotApi, WebhookHandler

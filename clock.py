@@ -40,7 +40,7 @@ stock_name = {
 
 
 
-@sched.scheduled_job('cron', minute='*/2')
+@sched.scheduled_job('cron', minute='*/30')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     # 馬上讓我們瞧瞧
@@ -48,7 +48,7 @@ def scheduled_job():
     # 利用datetime查詢時間
     print(f'{datetime.datetime.now().ctime()}')
     print('========== Sreach Stock =========')
-    stock = Stock('2330')    
+    stock = Stock('2317')    
     print(stock)
     print('========== APScheduler CRON =========')
     
