@@ -60,6 +60,6 @@ def scheduled_job():
     conn = urllib.request.urlopen(url)
        
     for key, value in conn.getheaders():
-        print(key)
+        print(key, value)
 
 sched.start()
