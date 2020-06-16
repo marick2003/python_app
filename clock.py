@@ -48,7 +48,7 @@ def scheduled_job():
     # 利用datetime查詢時間
     print(f'{datetime.datetime.now().ctime()}')
     print('========== Sreach Stock =========')
-    stock = Stock('2317')    
+    stock = twstock.Stock('2317')  
     print(stock)
     print('========== APScheduler CRON =========')
     
